@@ -33,11 +33,47 @@ const queryBuilder = {
 
     return findObjectParams;
   },
+  getModel(queryRest){
+    const {url} = queryRest;
+    const modelName = url.split('/')[3]
+    try {
+        const modelPath = require(`#src/models/${modelName}`); // Use template literal for flexibility
+        const model = mongoose.model(modelName, modelPath.schema); // Assuming schema is exported
 
-  extractQuery(queryRest) {
-    // TODO: Implement type validation and field existence checks
-    return { ...queryRest };
+        // Cache the model for future use (optional)
+        if (!this.models) {
+        this.models = {}; // Initialize cache if not already present
+        }
+        this.models[modelName] = model;
+
+        return model;
+    } catch (error) {
+        console.error(`Error loading model '${modelName}':`, error);
+        throw new Error('Failed to load model. Please check the model name and path.');
+    }
   },
+  extractQuery(queryRest) {
+    const validQuery = {};
+
+    for (const [key, value] of Object.entries(queryRest)) {
+        const fieldDefinition = this.getModel(queryRest).schema.paths[key]; // Access model schema
+
+        if (fieldDefinition) {
+        const isValidType = fieldDefinition.instance === value ||
+                            fieldDefinition.caster(value, { context: 'query' }) !== null; // Check for valid type or use caster for potential conversions
+
+        if (isValidType) {
+            validQuery[key] = value;
+        } else {
+            console.warn(`Invalid type for field '${key}'. Expected ${fieldDefinition.instance.constructor.name}, got ${typeof value}`);
+        }
+        } else {
+        console.warn(`Field '${key}' not found in model schema`);
+        }
+    }
+
+    return validQuery;
+},
 
   extractSort(sort) {
     const sortOptions = {};
