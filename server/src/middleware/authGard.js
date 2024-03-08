@@ -1,7 +1,7 @@
 import {verifyJwt}    from '#src/utils/jwtoken'
 
 
-const exposeMiddleware = {
+const authGardMiddleware = {
 
     protect:async (req,res,next)=>{
         const accessToken  = req.headers['authorization'];
@@ -15,6 +15,7 @@ const exposeMiddleware = {
             try {
                 const verify = verifyJwt(cleanAccess)
                 req.userId = verify.id
+                console.log(req)
                 return next()
             } catch (error) {
                 console.log(error.message)
@@ -26,4 +27,4 @@ const exposeMiddleware = {
     }
 }
 
-export default exposeMiddleware
+export default authGardMiddleware

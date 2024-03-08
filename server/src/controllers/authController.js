@@ -8,6 +8,7 @@ const exposeController = {
         const {body} = req
         const user = await usersService.findOneUserByEmail(body)
         
+        console.log(user)
         if(!user) return res.sendStatus(401)
         const comparePwd = await authService.comparePassword({password:body.password,storedPassword:user.password})
         const tokenPayload = {
@@ -23,6 +24,7 @@ const exposeController = {
             const updateRefresh = await usersService.updateUserToken({userId:user._id,refreshToken})
             return res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'strict' }).json(accessToken) 
         }
+        console.log(comparePwd)
         return res.sendStatus(401)
     },
     refreshToken:async(req,res)=>{

@@ -1,6 +1,16 @@
 import User  from "#src/models/Users";
 import bcrypt from "bcryptjs"
 
+const hashPassword = async function (password) {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(password, salt);
+        return hash;
+    } catch (error) {
+        console.error('Error hashing password:', error);
+        throw error; // Or handle the error appropriately
+    }
+    }
 const exposeServices = {
 
     findOneUserByEmail:async ({email})=>{
@@ -50,9 +60,8 @@ const exposeServices = {
         }
     },
     createUser: async (rawData)=>{
-        const {password} = rawData
-        const salt = bcrypt.genSaltSync(4);
-        const hash = bcrypt.hashSync(password, salt);
+        const {password} = rawData;
+        const hash = await hashPassword(password);
         
         const newUserData = {
             ...rawData,

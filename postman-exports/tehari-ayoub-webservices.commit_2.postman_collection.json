@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "b20a391b-681c-408b-8273-e59e0eca1c7a",
+		"name": "tehari-ayoub-webservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23835590"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/v1/users/",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWFkNTgyMmE1YzM3NjIyYjZmMzA3OCIsImxhc3ROYW1lIjoiVGVoYXJpIiwiZmlyc3ROYW1lIjoiQXlvdWIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNzA5ODg5MzMzLCJleHAiOjE3MDk5NzU3MzN9.tgtfZJ9b9esTVTRkJPPTlFxUO77k8qojhnWDqNOvwOE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lastName\" : \"Tehari\", \r\n    \"firstName\": \"Ayoub\",\r\n    \"email\": \"admin@email.com\",\r\n    \"password\":\"admin2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWFlMzFiNTlkOTA3MGI1YjI0YmEzZSIsImxhc3ROYW1lIjoiVGVoYXJpIiwiZmlyc3ROYW1lIjoiQXlvdWIiLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwiaWF0IjoxNzA5ODkzODM4LCJleHAiOjE3MTA0OTg2Mzh9.DRoUSsE22Yj9LZ_AIJ0zMPTJqKE3RTm3aHA4mk8kizc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"user\",\r\n    \"roles\":{\"_id\":\"65eada422a5c37622b6f307f\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/65eae31b59d9070b5b24ba3e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"65eae31b59d9070b5b24ba3e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy 3",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/65ca47bc8b94773b13b00b58",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"65ca47bc8b94773b13b00b58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const {access_token}  = response;\r",
+							"pm.globals.set(\"access_token\",access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin2@email.com\",\r\n    \"password\":\"admin2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWFkNTgyMmE1YzM3NjIyYjZmMzA3OCIsImxhc3ROYW1lIjoiVGVoYXJpIiwiZmlyc3ROYW1lIjoiQXlvdWIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNzA5ODg5MzMzLCJleHAiOjE3MDk5NzU3MzN9.tgtfZJ9b9esTVTRkJPPTlFxUO77k8qojhnWDqNOvwOE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"user\",\r\n    \"authorizations\":[\r\n        \"GET\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/roles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"roles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy 3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWFkNTgyMmE1YzM3NjIyYjZmMzA3OCIsImxhc3ROYW1lIjoiVGVoYXJpIiwiZmlyc3ROYW1lIjoiQXlvdWIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNzA5ODg5MzMzLCJleHAiOjE3MDk5NzU3MzN9.tgtfZJ9b9esTVTRkJPPTlFxUO77k8qojhnWDqNOvwOE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"admin\",\r\n    \"authorizations\":[\r\n        \"*\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/roles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"roles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/v1/users/ Copy 4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWFkNTgyMmE1YzM3NjIyYjZmMzA3OCIsImxhc3ROYW1lIjoiVGVoYXJpIiwiZmlyc3ROYW1lIjoiQXlvdWIiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNzA5ODg5MzMzLCJleHAiOjE3MDk5NzU3MzN9.tgtfZJ9b9esTVTRkJPPTlFxUO77k8qojhnWDqNOvwOE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"admin\",\r\n    \"authorizations\":[\r\n        \"*\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
