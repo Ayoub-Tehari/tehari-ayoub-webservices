@@ -1,14 +1,17 @@
 import express from 'express';
-import authGard from '#src/middleware/authGard'
+import rbacMiddleware  from '#src/middleware/rbac'  
+import authGardMiddleware from '#src/middleware/authGard'
+import rolesController from '#src/controllers/rolesController'
 
-import roleServices from '#src/services/rolesService'
 const router = express.Router();
 
-router.post('/',authGard.protect,async(req,res)=>{
-    const {body} = req
-    const addNewRole = await roleServices.addNewRoles(body)
-    res.json(addNewRole)
-});
+router.get('/',authGardMiddleware.protect, rbacMiddleware.authorizationChecker, rolesController.allRoles);
+
+router.post('/',authGardMiddleware.protect, rbacMiddleware.authorizationChecker, rolesController.createRole);
+
+router.patch('/:id',authGardMiddleware.protect, rbacMiddleware.authorizationChecker, rolesController.patchRole);
+
+router.delete('/:id',authGardMiddleware.protect,rbacMiddleware.authorizationChecker, rolesController.deleteRole);
 
 
 export default router;

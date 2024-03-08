@@ -15,7 +15,7 @@ const authGardMiddleware = {
             try {
                 const verify = verifyJwt(cleanAccess)
                 req.userId = verify.id
-                console.log(req)
+                //console.log(req)
                 return next()
             } catch (error) {
                 console.log(error.message)

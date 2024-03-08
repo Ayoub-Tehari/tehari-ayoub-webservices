@@ -1,27 +1,27 @@
-import Skills  from "#src/models/Skills";
+import Projects  from "#src/models/Projects";
 
 
 const exposeServices = {
 
-    findAllSkills: async ()=>{
+    findAllProjects: async ()=>{
         try {
-            const   allSkills = await Skills.find()
-            return  allSkills
+            const   allProjects = await Projects.find()
+            return  allProjects
         } catch (error) {
             throw error
         }
     },
-    addNewSkills:async (rawData)=>{
+    addNewProjects:async (rawData)=>{
         try {
-            const newSkills = new Skills(rawData)
-            const   addSkill = await newSkills.save()
-            return  addSkill
+            const newProjects = new Projects(rawData)
+            const   addProject = await newProjects.save()
+            return  addProject
         } catch (error) {
             throw error
         }
 
     },
-    patchSkill: async ({id,body})=>{
+    patchProject: async ({id,body})=>{
         const {
             categories=false,
             ...rest
@@ -35,23 +35,23 @@ const exposeServices = {
             ...rest
         }
         try {
-            const   patchSkill  = await Skill.findOneAndUpdate(
+            const   patchProject  = await Project.findOneAndUpdate(
                 {_id:id},
                 updateQ,
                 {new:true}
             ) 
-            return  patchSkill
+            return  patchProject
         } catch (error) {
             throw new Error(error)
         }
     },
-    deleteSkill: async ({id,body})=>{
+    deleteProject: async ({id,body})=>{
 
         try {
-            const   deletedSkill  = await Skill.findOneAndDelete(
+            const   deletedProject  = await Project.findOneAndDelete(
                 id
             ) 
-            return  deletedSkill
+            return  deletedProject
         } catch (error) {
             throw new Error(error)
         }

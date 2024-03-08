@@ -9,7 +9,14 @@ const userSchema = new Schema({
     password:{ type:String },
     roles:[{
         ref:'roles',
+        unique: true,
         type     : mongoose.Schema.Types.ObjectId
+    }],
+    skills:[{
+        ref:'skills',
+        unique: true,
+        type     : mongoose.Schema.Types.ObjectId
+        
     }],
     refreshToken:String
 },

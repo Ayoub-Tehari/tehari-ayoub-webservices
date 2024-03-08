@@ -2,7 +2,8 @@ import express from 'express';
 import ping from './ping.js';
 import auth from './auth.js';
 import users from './users.js';
-import creations from './creations.js';
+import skills from './skills.js';
+import projects from './projects.js';
 import roles from './roles.js';
 
 const router = express.Router();
@@ -20,7 +21,8 @@ router.get('/', (req, res) => {
 router.use('/ping', ping);
 router.use('/auth', auth);
 router.use('/users', users);
-router.use('/creations', creations);
+router.use('/skills', skills);
+router.use('/projects', projects);
 router.use('/roles', roles);
 
 
